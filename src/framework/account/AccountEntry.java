@@ -3,7 +3,7 @@ package framework.account;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-public abstract class AccountEntry implements IAccountEntry {
+public class AccountEntry implements IAccountEntry {
 
     protected final String id;
     protected final Account account;
