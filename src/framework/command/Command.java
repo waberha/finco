@@ -4,5 +4,5 @@ import framework.observer.Observable;
 
 public abstract class Command<T> extends Observable<T> {
 
-    abstract void execute();
+    public abstract void execute();
 }

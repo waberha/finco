@@ -13,9 +13,19 @@ public abstract class Account implements IAccount {
     protected double balance;
     protected final Collection<AccountEntry> entries = new ArrayList<>();
 
+    public Account() {
+        this.accountNo = UUID.randomUUID().toString().substring(0, 8);
+        this.owner.addAccount(this);
+    }
+
     public Account(Party owner) {
         this.owner = owner;
         this.accountNo = UUID.randomUUID().toString().substring(0, 8);
+        setOwner(owner);
+    }
+
+    public void setOwner(Party owner) {
+        this.owner = owner;
         this.owner.addAccount(this);
     }
 
@@ -42,4 +52,6 @@ public abstract class Account implements IAccount {
     public void addEntry(AccountEntry entry) {
         entries.add(entry);
     }
+
+    public abstract double addInterest();
 }
