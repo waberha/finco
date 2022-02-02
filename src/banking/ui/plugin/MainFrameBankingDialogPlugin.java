@@ -1,6 +1,6 @@
 package banking.ui.plugin;
 
-import ui.plugin.MainFrameDialogPlugin;
+import framework.ui.plugin.MainFrameDialogPlugin;
 
 public class MainFrameBankingDialogPlugin extends MainFrameDialogPlugin {
 

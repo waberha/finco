@@ -1,6 +1,6 @@
-package ui.template;
+package framework.ui.template;
 
-import ui.plugin.DepositDialogPlugin;
+import framework.ui.plugin.DepositDialogPlugin;
 
 import javax.swing.*;
 import java.awt.*;

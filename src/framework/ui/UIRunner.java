@@ -1,7 +1,7 @@
-package ui;
+package framework.ui;
 
-import ui.plugin.*;
-import ui.template.MainFrameTemplate;
+import framework.ui.plugin.*;
+import framework.ui.template.MainFrameTemplate;
 
 import javax.swing.*;
 import java.util.Optional;

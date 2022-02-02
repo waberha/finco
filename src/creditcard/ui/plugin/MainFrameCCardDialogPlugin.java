@@ -1,6 +1,6 @@
 package creditcard.ui.plugin;
 
-import ui.plugin.MainFrameDialogPlugin;
+import framework.ui.plugin.MainFrameDialogPlugin;
 
 public class MainFrameCCardDialogPlugin extends MainFrameDialogPlugin {
 

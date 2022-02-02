@@ -1,6 +1,6 @@
-package ui.template;
+package framework.ui.template;
 
-import ui.plugin.*;
+import framework.ui.plugin.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,7 +1,7 @@
 package creditcard.ui;
 
 import creditcard.ui.plugin.MainFrameCCardDialogPlugin;
-import ui.UIRunner;
+import framework.ui.UIRunner;
 
 public class CCardUI {
 

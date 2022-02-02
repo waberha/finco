@@ -1,4 +1,4 @@
-package ui;
+package framework.ui;
 
 public class FinCoUI {
 

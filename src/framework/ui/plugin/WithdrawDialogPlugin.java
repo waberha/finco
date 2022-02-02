@@ -1,4 +1,4 @@
-package ui.plugin;
+package framework.ui.plugin;
 
 public class WithdrawDialogPlugin extends DialogPlugin {
 

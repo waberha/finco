@@ -1,7 +1,7 @@
 package banking.ui;
 
 import banking.ui.plugin.MainFrameBankingDialogPlugin;
-import ui.UIRunner;
+import framework.ui.UIRunner;
 
 public class BankingUI {
 

@@ -1,6 +1,6 @@
-package ui.template;
+package framework.ui.template;
 
-import ui.plugin.WithdrawDialogPlugin;
+import framework.ui.plugin.WithdrawDialogPlugin;
 
 import javax.swing.*;
 import java.awt.*;

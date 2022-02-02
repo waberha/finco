@@ -1,11 +1,11 @@
-package ui.plugin;
+package framework.ui.plugin;
 
 import java.awt.*;
 
-public class AddOrganizationAccountDialogPlugin extends DialogPlugin{
-
+public class AddPersonalAccountDialogPlugin extends DialogPlugin{
+    
     public String getDialogName() {
-        return "Add organization account";
+        return "Add personal account";
     }
 
     public Component getTopPanel() {
