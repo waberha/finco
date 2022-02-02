@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public abstract class Account implements IAccount {
 
-    protected final Party owner;
+    protected  Party owner;
     protected final String accountNo;
     protected double balance;
     protected final Collection<AccountEntry> entries = new ArrayList<>();
