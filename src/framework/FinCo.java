@@ -21,7 +21,7 @@ public class FinCo {
 
     private final Controller controller;
 
-    public FinCo(FinCoBuilder builder) {
+    private FinCo(FinCoBuilder builder) {
 
         AbstractRepositoryFactory repositoryFactory = Optional
                 .ofNullable(builder.repositoryFactory)
