@@ -14,6 +14,7 @@ public class InMemoryAccountEntryRepository implements AccountEntryRepository {
     @Override
     public void save(AccountEntry entry) {
         entries.add(entry);
+        entry.getAccount().setBalance(entry.getAccount().getBalance() + entry.getAmount());
     }
 
     @Override
