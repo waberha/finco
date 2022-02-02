@@ -5,40 +5,55 @@ import framework.party.Party;
 import framework.repo.AccountEntryRepository;
 import framework.repo.AccountRepository;
 import framework.repo.PartyRepository;
+import framework.rule.RuleManager;
 
 public class CommandFactory {
 
     protected final PartyRepository partyRepository;
     protected final AccountRepository accountRepository;
     protected final AccountEntryRepository accountEntryRepository;
+    protected final RuleManager ruleManager;
 
-    public CommandFactory(PartyRepository partyRepository, AccountRepository accountRepository, AccountEntryRepository accountEntryRepository) {
+    public CommandFactory(RuleManager ruleManager, PartyRepository partyRepository, AccountRepository accountRepository, AccountEntryRepository accountEntryRepository) {
+        this.ruleManager = ruleManager;
         this.partyRepository = partyRepository;
         this.accountRepository = accountRepository;
         this.accountEntryRepository = accountEntryRepository;
     }
 
     public CreatePartyCommand createCreatePartyCommand(Party party, Account account) {
-        return new CreatePartyCommand(partyRepository, accountRepository, party, account);
+        CreatePartyCommand command = new CreatePartyCommand(partyRepository, accountRepository, party, account);
+        command.attachObserver(ruleManager.getPartyRuleManager());
+        return command;
     }
 
     public RemovePartyCommand createRemovePartyCommand(String name) {
-        return new RemovePartyCommand(partyRepository, null, name);
+        RemovePartyCommand command = new RemovePartyCommand(partyRepository, null, name);
+        command.attachObserver(ruleManager.getPartyRuleManager());
+        return command;
     }
 
     public CreateAccountCommand createCreateAccountCommand(String name, Account account) {
-        return new CreateAccountCommand(partyRepository, accountRepository, account, name);
+        CreateAccountCommand command = new CreateAccountCommand(partyRepository, accountRepository, account, name);
+        command.attachObserver(ruleManager.getAccountRuleManager());
+        return command;
     }
 
     public RemoveAccountCommand createRemoveAccountCommand(String accountNo) {
-        return new RemoveAccountCommand(accountRepository, null, accountNo);
+        RemoveAccountCommand command = new RemoveAccountCommand(accountRepository, null, accountNo);
+        command.attachObserver(ruleManager.getAccountRuleManager());
+        return command;
     }
 
     public WithdrawMoneyCommand createWithdrawMoneyCommand(String accountNo, double amount) {
-        return new WithdrawMoneyCommand(accountRepository, accountEntryRepository, accountNo, amount);
+        WithdrawMoneyCommand command =  new WithdrawMoneyCommand(accountRepository, accountEntryRepository, accountNo, amount);
+        command.attachObserver(ruleManager.getAccountEntryRuleManager());
+        return command;
     }
 
     public DepositMoneyCommand createDepositMoneyCommand(String accountNo, double amount) {
-        return new DepositMoneyCommand(accountRepository, accountEntryRepository, accountNo, amount);
+        DepositMoneyCommand command = new DepositMoneyCommand(accountRepository, accountEntryRepository, accountNo, amount);
+        command.attachObserver(ruleManager.getAccountEntryRuleManager());
+        return command;
     }
 }

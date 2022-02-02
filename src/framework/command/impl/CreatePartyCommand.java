@@ -23,6 +23,7 @@ public class CreatePartyCommand extends PartyCommand {
         account.setOwner(party);
         partyRepository.save(party);
         accountRepository.save(account);
+        notify(party);
     }
 
     public Account getAccount() {

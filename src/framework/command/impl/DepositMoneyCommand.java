@@ -29,5 +29,7 @@ public class DepositMoneyCommand extends AccountEntryCommand {
 
         AccountEntry entry = new AccountEntry(account.get(), Math.abs(amount));
         accountEntryRepository.save(entry);
+
+        notify(entry);
     }
 }

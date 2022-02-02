@@ -29,5 +29,6 @@ public class WithdrawMoneyCommand extends AccountEntryCommand {
 
         AccountEntry entry = new AccountEntry(account.get(), Math.abs(amount) * -1);
         accountEntryRepository.save(entry);
+        notify(entry);
     }
 }

@@ -16,7 +16,7 @@ public class RemoveAccountCommand extends AccountCommand {
 
     @Override
     public void execute() {
-        accountRepository.findById(accountNo)
-                .ifPresent(accountRepository::delete);
+        accountRepository.findById(accountNo).ifPresent(accountRepository::delete);
+        notify(account);
     }
 }

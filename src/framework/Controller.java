@@ -1,7 +1,6 @@
 package framework;
 
 import framework.account.Account;
-import framework.command.Command;
 import framework.command.CommandManager;
 import framework.command.impl.*;
 import framework.party.Party;

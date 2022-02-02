@@ -16,7 +16,7 @@ public class RemovePartyCommand extends PartyCommand {
 
     @Override
     public void execute() {
-        partyRepository.findById(name)
-                .ifPresent(partyRepository::delete);
+        partyRepository.findById(name).ifPresent(partyRepository::delete);
+        notify(party);
     }
 }

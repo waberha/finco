@@ -28,6 +28,7 @@ public class CreateAccountCommand extends AccountCommand {
 
         account.setOwner(party);
         accountRepository.save(account);
+        notify(account);
     }
 
     public Account getAccount() {

@@ -21,10 +21,12 @@ public class AddInterestCommand extends AccountCommand {
     public void execute() {
 
         Collection<Account> accounts = accountRepository.findAll();
+
         for(Account account : accounts) {
             double interest = account.addInterest();
             AccountEntry entry = new AccountEntry(account, interest);
             accountEntryRepository.save(entry);
+            notify(account);
         }
     }
 }

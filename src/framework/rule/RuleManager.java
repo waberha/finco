@@ -14,16 +14,16 @@ public class RuleManager {
     private final Collection<Rule<Account>> accountRules = new ArrayList<>();
     private final Collection<Rule<AccountEntry>> accountEntryRules = new ArrayList<>();
 
-    public void addPartyRule(Rule<Party> rule) {
-        partyRules.add(rule);
+    public void addPartyRules(Collection<Rule<Party>> rules) {
+        partyRules.addAll(rules);
     }
 
-    public void addAccountRule(Rule<Account> rule) {
-        accountRules.add(rule);
+    public void addAccountRules(Collection<Rule<Account>> rules) {
+        accountRules.addAll(rules);
     }
 
-    public void addAccountEntryRule(Rule<AccountEntry> rule) {
-        accountEntryRules.add(rule);
+    public void addAccountEntryRules(Collection<Rule<AccountEntry>> rules) {
+        accountEntryRules.addAll(rules);
     }
 
     public PartyRuleManager getPartyRuleManager() {
