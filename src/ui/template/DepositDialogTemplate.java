@@ -5,7 +5,7 @@ import ui.plugin.DepositDialogPlugin;
 import javax.swing.*;
 import java.awt.*;
 
-public class DepositDialogTemplate extends JDialog {
+public final class DepositDialogTemplate extends JDialog {
 
     private MainFrameTemplate parentframe;
     private String accnr;

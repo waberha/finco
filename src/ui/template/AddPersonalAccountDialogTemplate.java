@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public class AddPersonalAccountDialogTemplate extends JDialog {
+public final class AddPersonalAccountDialogTemplate extends JDialog {
 
     private MainFrameTemplate parentframe;
 

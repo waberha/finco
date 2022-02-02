@@ -5,7 +5,7 @@ import ui.plugin.WithdrawDialogPlugin;
 import javax.swing.*;
 import java.awt.*;
 
-public class WithdrawDialogTemplate extends JDialog {
+public final class WithdrawDialogTemplate extends JDialog {
 
     private MainFrameTemplate parentframe;
     private String accnr;

@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 /**
  * A basic JFC based application.
  **/
-public class MainFrameTemplate extends JFrame {
+public final class MainFrameTemplate extends JFrame {
     /****
      * init variables in the object
      ****/

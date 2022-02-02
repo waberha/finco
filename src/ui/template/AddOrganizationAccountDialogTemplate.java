@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Optional;
 
 
-public class AddOrganizationAccountDialogTemplate extends JDialog {
+public final class AddOrganizationAccountDialogTemplate extends JDialog {
 
     private MainFrameTemplate parentframe;
     public AddOrganizationAccountDialogTemplate(MainFrameTemplate parent, AddOrganizationAccountDialogPlugin dialogPlugin) {
