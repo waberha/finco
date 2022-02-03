@@ -2,17 +2,16 @@ package framework.ui.template; /**
  * A basic implementation of the JDialog class.
  **/
 
-import framework.ui.plugin.AddPersonalAccountDialogPlugin;
+import framework.ui.plugin.AddAccountDialogPlugin;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Optional;
 
-public final class AddPersonalAccountDialogTemplate extends JDialog {
+public class AddAccountDialogTemplate extends JDialog {
+    private MainframeTemplate parentframe;
 
-    private MainFrameTemplate parentframe;
-
-    public AddPersonalAccountDialogTemplate(MainFrameTemplate parent, AddPersonalAccountDialogPlugin dialogPlugin) {
+    public AddAccountDialogTemplate(MainframeTemplate parent, AddAccountDialogPlugin dialogPlugin, AddAccountDialogListener dialogListener) {
         super(parent);
         parentframe = parent;
 
@@ -28,6 +27,7 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
         setSize(283, 303);
         setVisible(false);
 
+        // inject optional top panel
         Optional.ofNullable(dialogPlugin.getTopPanel()).ifPresent(getContentPane()::add);
 
         JLabel1.setText("Name");
@@ -50,10 +50,6 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
         getContentPane().add(JLabel5);
         JLabel5.setForeground(Color.black);
         JLabel5.setBounds(12, 180, 48, 24);
-        JLabel6.setText("Birthdate");
-        getContentPane().add(JLabel6);
-        JLabel6.setForeground(Color.black);
-        JLabel6.setBounds(12, 204, 96, 24);
         JLabel7.setText("Email");
         getContentPane().add(JLabel7);
         JLabel7.setForeground(Color.black);
@@ -68,9 +64,8 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
         JTextField_STR.setBounds(84, 108, 156, 20);
         getContentPane().add(JTextField_ZIP);
         JTextField_ZIP.setBounds(84, 180, 156, 20);
-
-        Optional.ofNullable(dialogPlugin.getBottomPanel()).ifPresent(getContentPane()::add);
-
+        getContentPane().add(JTextField_EM);
+        JTextField_EM.setBounds(84, 228, 156, 20);
         JButton_OK.setText("OK");
         JButton_OK.setActionCommand("OK");
         getContentPane().add(JButton_OK);
@@ -88,9 +83,9 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
         //}}
 
         //{{REGISTER_LISTENERS
-        SymAction lSymAction = new SymAction();
-        JButton_OK.addActionListener(lSymAction);
-        JButton_Cancel.addActionListener(lSymAction);
+        dialogListener.setDialogTemplate(this);
+        JButton_OK.addActionListener(dialogListener);
+        JButton_Cancel.addActionListener(dialogListener);
         //}}
     }
 
@@ -101,28 +96,20 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
     JLabel JLabel3 = new JLabel();
     JLabel JLabel4 = new JLabel();
     JLabel JLabel5 = new JLabel();
-    JLabel JLabel6 = new JLabel();
+//    JLabel JLabel6 = new JLabel();
     JLabel JLabel7 = new JLabel();
     JTextField JTextField_NAME = new JTextField();
     JTextField JTextField_CT = new JTextField();
     JTextField JTextField_ST = new JTextField();
     JTextField JTextField_STR = new JTextField();
     JTextField JTextField_ZIP = new JTextField();
+//    JTextField JTextField_BD = new JTextField();
+    JTextField JTextField_EM = new JTextField();
     JButton JButton_OK = new JButton();
     JButton JButton_Cancel = new JButton();
     JTextField JTextField_ACNR = new JTextField();
     JLabel JLabel8 = new JLabel();
     //}}
-
-    class SymAction implements java.awt.event.ActionListener {
-        public void actionPerformed(java.awt.event.ActionEvent event) {
-            Object object = event.getSource();
-            if (object == JButton_OK)
-                JButtonOK_actionPerformed(event);
-            else if (object == JButton_Cancel)
-                JButtonCalcel_actionPerformed(event);
-        }
-    }
 
     void JButtonOK_actionPerformed(java.awt.event.ActionEvent event) {
         parentframe.accountnr = JTextField_ACNR.getText();
@@ -130,12 +117,7 @@ public final class AddPersonalAccountDialogTemplate extends JDialog {
         parentframe.street = JTextField_STR.getText();
         parentframe.city = JTextField_CT.getText();
         parentframe.zip = JTextField_ZIP.getText();
-//        parentframe.state = JTextField_ST.getText();
-//        if (JRadioButton_Chk.isSelected())
-//            parentframe.accountType = "Ch";
-//        else
-//            parentframe.accountType = "S";
-        parentframe.newaccount = true;
+        parentframe.state = JTextField_ST.getText();
         dispose();
     }
 

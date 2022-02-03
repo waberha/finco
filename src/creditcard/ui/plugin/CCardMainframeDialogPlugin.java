@@ -1,8 +1,9 @@
 package creditcard.ui.plugin;
 
-import framework.ui.plugin.MainFrameDialogPlugin;
 
-public class MainFrameCCardDialogPlugin extends MainFrameDialogPlugin {
+import framework.ui.plugin.MainframeTemplatePlugin;
+
+public class CCardMainframeDialogPlugin extends MainframeTemplatePlugin {
 
     @Override
     public String getDialogName() {
@@ -10,7 +11,7 @@ public class MainFrameCCardDialogPlugin extends MainFrameDialogPlugin {
     }
 
     @Override
-    public String getWithdrawButtonName() {
+    public String getWithdrawButtonLabel() {
         return "Charge";
     }
 }

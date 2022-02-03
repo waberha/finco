@@ -1,8 +1,8 @@
 package banking.ui.plugin;
 
-import framework.ui.plugin.MainFrameDialogPlugin;
+import framework.ui.plugin.MainframeTemplatePlugin;
 
-public class MainFrameBankingDialogPlugin extends MainFrameDialogPlugin {
+public class BankMainframePlugin extends MainframeTemplatePlugin {
 
     @Override
     public String getDialogName() {

@@ -4,7 +4,7 @@ import framework.account.Account;
 import framework.command.Command;
 import framework.command.CommandManager;
 import framework.command.impl.*;
-import framework.party.Party;
+import framework.customer.Customer;
 import framework.reporting.ReportingStrategy;
 
 public class Controller {
@@ -18,19 +18,19 @@ public class Controller {
         this.commandFactory = commandFactory;
     }
 
-    public Account createParty(Party party, Account account) {
-        CreatePartyCommand command = commandFactory.createCreatePartyCommand(party, account);
+    public Account addCustomer(Customer customer, Account account) {
+        CreateCustomerCommand command = commandFactory.createAddCustomerCommand(customer, account);
         commandManager.submit(command);
         return command.getAccount();
     }
 
-    public void removeParty(String name) {
-        RemovePartyCommand command = commandFactory.createRemovePartyCommand(name);
+    public void removeCustomer(String name) {
+        RemoveCustomerCommand command = commandFactory.createRemoveCustomerCommand(name);
         commandManager.submit(command);
     }
 
-    public Account createAccount(String name, Account account) {
-        CreateAccountCommand command = commandFactory.createCreateAccountCommand(name, account);
+    public Account addAccount(String name, Account account) {
+        CreateAccountCommand command = commandFactory.createAddAccountCommand(name, account);
         commandManager.submit(command);
         return command.getAccount();
     }

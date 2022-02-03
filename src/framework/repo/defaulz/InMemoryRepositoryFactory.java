@@ -3,13 +3,13 @@ package framework.repo.defaulz;
 import framework.repo.AbstractRepositoryFactory;
 import framework.repo.AccountEntryRepository;
 import framework.repo.AccountRepository;
-import framework.repo.PartyRepository;
+import framework.repo.CustomerRepository;
 
 public class InMemoryRepositoryFactory extends AbstractRepositoryFactory {
 
     @Override
-    public PartyRepository createPartyRepository() {
-        return new InMemoryPartyRepository();
+    public CustomerRepository createCustomerRepository() {
+        return new InMemoryCustomerRepository();
     }
 
     @Override

@@ -3,19 +3,19 @@ package framework.rule;
 import framework.account.Account;
 import framework.account.AccountEntry;
 import framework.observer.Observer;
-import framework.party.Party;
+import framework.customer.Customer;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class RuleManager {
 
-    private final Collection<Rule<Party>> partyRules = new ArrayList<>();
+    private final Collection<Rule<Customer>> customerRules = new ArrayList<>();
     private final Collection<Rule<Account>> accountRules = new ArrayList<>();
     private final Collection<Rule<AccountEntry>> accountEntryRules = new ArrayList<>();
 
-    public void addPartyRules(Collection<Rule<Party>> rules) {
-        partyRules.addAll(rules);
+    public void addCustomerRules(Collection<Rule<Customer>> rules) {
+        customerRules.addAll(rules);
     }
 
     public void addAccountRules(Collection<Rule<Account>> rules) {
@@ -26,10 +26,10 @@ public class RuleManager {
         accountEntryRules.addAll(rules);
     }
 
-    public PartyRuleManager getPartyRuleManager() {
+    public CustomerRuleManager getCustomerRuleManager() {
         // Lazy loading rule manager
-        if (partyRuleManager == null) partyRuleManager = new PartyRuleManager();
-        return partyRuleManager;
+        if (customerRuleManager == null) customerRuleManager = new CustomerRuleManager();
+        return customerRuleManager;
     }
 
     public AccountRuleManager getAccountRuleManager() {
@@ -44,16 +44,16 @@ public class RuleManager {
         return accountEntryRuleManager;
     }
 
-    public class PartyRuleManager implements Observer<Party> {
+    public class CustomerRuleManager implements Observer<Customer> {
 
         // package-protected constructor
-        PartyRuleManager(){
+        CustomerRuleManager(){
         }
 
         @Override
-        public void update(Party party) {
-            for (Rule<Party> rule : partyRules) {
-                if (rule.isApplicable(party)) rule.apply(party);
+        public void update(Customer customer) {
+            for (Rule<Customer> rule : customerRules) {
+                if (rule.isApplicable(customer)) rule.apply(customer);
             }
         }
     }
@@ -86,7 +86,7 @@ public class RuleManager {
         }
     }
 
-    private PartyRuleManager partyRuleManager;
+    private CustomerRuleManager customerRuleManager;
     private AccountRuleManager accountRuleManager;
     private AccountEntryRuleManager accountEntryRuleManager;
 }

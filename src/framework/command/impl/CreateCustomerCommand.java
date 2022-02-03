@@ -1,29 +1,29 @@
 package framework.command.impl;
 
 import framework.account.Account;
-import framework.command.PartyCommand;
-import framework.party.Party;
+import framework.command.CustomerCommand;
+import framework.customer.Customer;
 import framework.repo.AccountRepository;
-import framework.repo.PartyRepository;
+import framework.repo.CustomerRepository;
 
-public class CreatePartyCommand extends PartyCommand {
+public class CreateCustomerCommand extends CustomerCommand {
 
     private final AccountRepository accountRepository;
     private final Account account;
 
     // Package protecting constructor
-    CreatePartyCommand(PartyRepository partyRepository, AccountRepository accountRepository, Party party, Account account) {
-        super(partyRepository, party);
+    CreateCustomerCommand(CustomerRepository customerRepository, AccountRepository accountRepository, Customer customer, Account account) {
+        super(customerRepository, customer);
         this.accountRepository = accountRepository;
         this.account = account;
     }
 
     @Override
     public void execute() {
-        account.setOwner(party);
-        partyRepository.save(party);
+        account.setCustomer(customer);
+        customerRepository.save(customer);
         accountRepository.save(account);
-        notify(party);
+        notify(customer);
     }
 
     public Account getAccount() {

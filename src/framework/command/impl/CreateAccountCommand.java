@@ -2,31 +2,29 @@ package framework.command.impl;
 
 import framework.account.Account;
 import framework.command.AccountCommand;
-import framework.party.Party;
+import framework.customer.Customer;
 import framework.repo.AccountRepository;
-import framework.repo.PartyRepository;
-
-import java.util.Optional;
+import framework.repo.CustomerRepository;
 
 public class CreateAccountCommand extends AccountCommand {
 
-    private final PartyRepository partyRepository;
+    private final CustomerRepository customerRepository;
     private final String name;
 
     // Package protecting constructor
-    CreateAccountCommand(PartyRepository partyRepository, AccountRepository accountRepository, Account account, String name) {
+    CreateAccountCommand(CustomerRepository customerRepository, AccountRepository accountRepository, Account account, String name) {
         super(accountRepository, account);
-        this.partyRepository = partyRepository;
+        this.customerRepository = customerRepository;
         this.name = name;
     }
 
     @Override
     public void execute() {
 
-        Party party = partyRepository.findById(name)
-                .orElseThrow(() -> new RuntimeException("Unknown party"));
+        Customer customer = customerRepository.findById(name)
+                .orElseThrow(() -> new RuntimeException("Unknown customer"));
 
-        account.setOwner(party);
+        account.setCustomer(customer);
         accountRepository.save(account);
         notify(account);
     }

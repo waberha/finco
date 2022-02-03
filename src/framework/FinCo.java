@@ -4,14 +4,15 @@ import framework.account.Account;
 import framework.account.AccountEntry;
 import framework.command.CommandManager;
 import framework.command.impl.CommandFactory;
-import framework.party.Party;
+import framework.customer.Customer;
 import framework.repo.AbstractRepositoryFactory;
 import framework.repo.AccountEntryRepository;
 import framework.repo.AccountRepository;
-import framework.repo.PartyRepository;
+import framework.repo.CustomerRepository;
 import framework.repo.defaulz.InMemoryRepositoryFactory;
 import framework.rule.Rule;
 import framework.rule.RuleManager;
+import framework.ui.UIRunner;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,33 +28,40 @@ public class FinCo {
                 .ofNullable(builder.repositoryFactory)
                 .orElse(new InMemoryRepositoryFactory()); // default repo
 
-        PartyRepository partyRepository = repositoryFactory.createPartyRepository();
+        CustomerRepository customerRepository = repositoryFactory.createCustomerRepository();
         AccountRepository accountRepository = repositoryFactory.createAccountRepository();
         AccountEntryRepository accountEntryRepository = repositoryFactory.createAccountEntryRepository();
 
         CommandManager commandManager = new CommandManager();
 
         RuleManager ruleManager = new RuleManager();
-        ruleManager.addPartyRules(builder.partyRules);
+        ruleManager.addCustomerRules(builder.customerRules);
         ruleManager.addAccountRules(builder.accountRules);
         ruleManager.addAccountEntryRules(builder.accountEntryRules);
 
-        controller = new Controller(commandManager, new CommandFactory(ruleManager, partyRepository, accountRepository, accountEntryRepository));
+        controller = new Controller(commandManager, new CommandFactory(ruleManager, customerRepository, accountRepository, accountEntryRepository));
     }
 
     public Controller run() {
         return controller;
     }
 
+    // Default entry point
+    public static void main(String[] args) {
+
+        UIRunner uiRunner = new UIRunner.UIRunnerBuilder().build();
+        uiRunner.run(new FinCo.FinCoBuilder().build());
+    }
+
     public static class FinCoBuilder {
 
         private AbstractRepositoryFactory repositoryFactory;
-        private final Collection<Rule<Party>> partyRules = new ArrayList<>();
+        private final Collection<Rule<Customer>> customerRules = new ArrayList<>();
         private final Collection<Rule<Account>> accountRules = new ArrayList<>();
         private final Collection<Rule<AccountEntry>> accountEntryRules = new ArrayList<>();
 
-        public FinCoBuilder partyRule(Rule<Party> rule) {
-            partyRules.add(rule);
+        public FinCoBuilder customerRule(Rule<Customer> rule) {
+            customerRules.add(rule);
             return this;
         }
 

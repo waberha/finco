@@ -1,11 +1,11 @@
-package framework.party;
+package framework.customer;
 
 import framework.account.Account;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-public abstract class Party implements IParty {
+public abstract class Customer implements ICustomer {
 
     protected final String name;
     protected final Collection<Account> accounts = new ArrayList<>();
@@ -16,7 +16,9 @@ public abstract class Party implements IParty {
     protected String zip;
     protected String email;
 
-    public Party(String name) {
+    public abstract void emailCustomer(String subject, String message);
+
+    public Customer(String name) {
         this.name = name;
     }
 

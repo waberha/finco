@@ -1,6 +1,6 @@
 package framework.account;
 
-import framework.party.Party;
+import framework.customer.Customer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,33 +8,33 @@ import java.util.UUID;
 
 public abstract class Account implements IAccount {
 
-    protected Party owner;
+    protected Customer customer;
     protected final String accountNo;
     protected double balance;
     protected final Collection<AccountEntry> entries = new ArrayList<>();
 
     public Account() {
         this.accountNo = UUID.randomUUID().toString().substring(0, 8);
-        this.owner.addAccount(this);
+        this.customer.addAccount(this);
     }
 
-    public Account(Party owner) {
-        this.owner = owner;
+    public Account(Customer customer) {
+        this.customer = customer;
         this.accountNo = UUID.randomUUID().toString().substring(0, 8);
-        setOwner(owner);
+        setCustomer(customer);
     }
 
-    public void setOwner(Party owner) {
-        this.owner = owner;
-        this.owner.addAccount(this);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        this.customer.addAccount(this);
     }
 
     public Collection<AccountEntry> getEntries() {
         return entries;
     }
 
-    public Party getOwner() {
-        return owner;
+    public Customer getCustomer() {
+        return customer;
     }
 
     public String getAccountNo() {

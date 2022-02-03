@@ -1,17 +1,20 @@
 package framework.ui;
 
+import framework.Controller;
+import framework.FinCo;
 import framework.ui.plugin.*;
-import framework.ui.template.MainFrameTemplate;
+import framework.ui.template.MainframeTemplate;
 
 import javax.swing.*;
 import java.util.Optional;
 
 public class UIRunner {
 
-    private MainFrameTemplate mainFrameTemplate;
+    private MainframeTemplate mainFrameTemplate;
 
-    public void run() {
+    public Controller run(FinCo finCo) {
         mainFrameTemplate.setVisible(true);
+        return finCo.run();
     }
 
     private UIRunner(UIRunnerBuilder builder) {
@@ -23,12 +26,11 @@ public class UIRunner {
             } catch (Exception e) {
             }
 
-             mainFrameTemplate = new MainFrameTemplate(
-                    Optional.ofNullable(builder.depositDialogPlugin).orElse(new DepositDialogPlugin()),
-                    Optional.ofNullable(builder.withdrawDialogPlugin).orElse(new WithdrawDialogPlugin()),
-                    Optional.ofNullable(builder.addPersonalAccountDialogPlugin).orElse(new AddPersonalAccountDialogPlugin()),
-                    Optional.ofNullable(builder.addOrganizationAccountDialogPlugin).orElse(new AddOrganizationAccountDialogPlugin()),
-                    Optional.ofNullable(builder.mainFrameDialogPlugin).orElse(new MainFrameDialogPlugin())
+            mainFrameTemplate = new MainframeTemplate(
+                    Optional.ofNullable(builder.mainFrameTemplatePlugin).orElse(new MainframeTemplatePlugin()),
+                    Optional.ofNullable(builder.addAccountDialogPlugin).orElse(new AddAccountDialogPlugin()),
+                    Optional.ofNullable(builder.depositMoneyDialogPlugin).orElse(new DepositMoneyDialogPlugin()),
+                    Optional.ofNullable(builder.withdrawMoneyDialogPlugin).orElse(new WithdrawMoneyDialogPlugin())
             );
 
         } catch (Throwable t) {
@@ -40,34 +42,28 @@ public class UIRunner {
 
     public static class UIRunnerBuilder {
 
-        private MainFrameDialogPlugin mainFrameDialogPlugin;
-        private AddOrganizationAccountDialogPlugin addOrganizationAccountDialogPlugin;
-        private AddPersonalAccountDialogPlugin addPersonalAccountDialogPlugin;
-        private DepositDialogPlugin depositDialogPlugin;
-        private WithdrawDialogPlugin withdrawDialogPlugin;
+        private MainframeTemplatePlugin mainFrameTemplatePlugin;
+        private AddAccountDialogPlugin addAccountDialogPlugin;
+        private DepositMoneyDialogPlugin depositMoneyDialogPlugin;
+        private WithdrawMoneyDialogPlugin withdrawMoneyDialogPlugin;
 
-        public UIRunnerBuilder dialogPlugin(MainFrameDialogPlugin dialogPlugin) {
-            mainFrameDialogPlugin = dialogPlugin;
+        public UIRunnerBuilder dialogPlugin(MainframeTemplatePlugin dialogPlugin) {
+            mainFrameTemplatePlugin = dialogPlugin;
             return this;
         }
 
-        public UIRunnerBuilder dialogPlugin(AddOrganizationAccountDialogPlugin dialogPlugin) {
-            addOrganizationAccountDialogPlugin = dialogPlugin;
+        public UIRunnerBuilder dialogPlugin(AddAccountDialogPlugin dialogPlugin) {
+            addAccountDialogPlugin = dialogPlugin;
             return this;
         }
 
-        public UIRunnerBuilder dialogPlugin(AddPersonalAccountDialogPlugin dialogPlugin) {
-            addPersonalAccountDialogPlugin = dialogPlugin;
+        public UIRunnerBuilder dialogPlugin(DepositMoneyDialogPlugin dialogPlugin) {
+            depositMoneyDialogPlugin = dialogPlugin;
             return this;
         }
 
-        public UIRunnerBuilder dialogPlugin(DepositDialogPlugin dialogPlugin) {
-            depositDialogPlugin = dialogPlugin;
-            return this;
-        }
-
-        public UIRunnerBuilder dialogPlugin(WithdrawDialogPlugin dialogPlugin) {
-            withdrawDialogPlugin = dialogPlugin;
+        public UIRunnerBuilder dialogPlugin(WithdrawMoneyDialogPlugin dialogPlugin) {
+            withdrawMoneyDialogPlugin = dialogPlugin;
             return this;
         }
 
